@@ -1,4 +1,4 @@
-package DP;
+package DPBegineer;
 
 import java.io.*;
 

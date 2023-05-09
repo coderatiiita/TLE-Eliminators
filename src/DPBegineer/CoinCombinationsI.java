@@ -1,4 +1,4 @@
-package DP;
+package DPBegineer;
 
 import java.util.Arrays;
 import java.util.Scanner;
