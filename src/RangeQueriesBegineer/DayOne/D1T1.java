@@ -1,5 +1,5 @@
-package RangeQueriesBegineer;
-
+package RangeQueriesBegineer.DayOne;
+// https://codeforces.com/edu/course/2/lesson/4/1/practice/contest/273169/problem/A
 import java.io.*;
 import java.util.StringTokenizer;
 
