@@ -4,7 +4,7 @@ package RangeQueriesBegineer.DayTwo;
 import java.io.*;
 import java.util.StringTokenizer;
 
-public class D2T1 {
+public class SegmentWithTheMaximumSum {
 
     // Fast I/O class for reading input
     static class FastReader {

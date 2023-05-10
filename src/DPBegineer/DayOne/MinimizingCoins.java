@@ -1,4 +1,4 @@
-package DPBegineer;
+package DPBegineer.DayOne;
 
 import java.util.Arrays;
 import java.util.Scanner;

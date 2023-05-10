@@ -3,7 +3,7 @@ package RangeQueriesBegineer.DayOne;
 import java.io.*;
 import java.util.StringTokenizer;
 
-public class D1T1 {
+public class SegmentTreeForTheSum {
     public static void main(String[] args) throws IOException {
         FastReader in = new FastReader();
         PrintWriter out = new PrintWriter(new BufferedWriter(new OutputStreamWriter(System.out)));

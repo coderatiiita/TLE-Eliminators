@@ -1,10 +1,10 @@
 package RangeQueriesBegineer.DayOne;
-// https://codeforces.com/edu/course/2/lesson/4/1/practice/contest/273169/problem/C
+// https://codeforces.com/edu/course/2/lesson/4/1/practice/contest/273169/problem/B
 import java.io.*;
 import java.util.StringTokenizer;
 
-public class D1T3 {
-  public static void main(String[] args) {
+public class SegmentTreeForTheMinimum {
+  public static void main(String[] args) throws IOException {
     FastReader in = new FastReader();
     PrintWriter out = new PrintWriter(new BufferedWriter(new OutputStreamWriter(System.out)));
 
@@ -27,8 +27,7 @@ public class D1T3 {
       } else {
         int l = in.nextInt();
         int r = in.nextInt();
-        Pair ans = st.query(l, r - 1);
-        out.printf("%d %d\n", ans.min, ans.count);
+        out.println(st.query(l, r - 1));
       }
     }
 
@@ -81,37 +80,41 @@ public class D1T3 {
   }
 
   static class SegmentTree {
-    private Pair[] tree;
+    private long[] tree;
     private long[] arr;
     private int n;
 
     public SegmentTree(long[] arr) {
       this.arr = arr;
       this.n = arr.length;
-      this.tree = new Pair[4 * n];
+      this.tree = new long[4 * n + 4];
       build(1, 0, n - 1);
     }
 
     private void build(int v, int tl, int tr) {
       if (tl == tr) {
-        tree[v] = new Pair(arr[tl], 1);
+        tree[v] = arr[tl];
       } else {
         int tm = (tl + tr) / 2;
         build(2 * v, tl, tm);
         build(2 * v + 1, tm + 1, tr);
-        tree[v] = merge(tree[2 * v], tree[2 * v + 1]);
+        tree[v] = Math.min(tree[2 * v], tree[2 * v + 1]);
       }
     }
 
-    public Pair query(int l, int r) {
+    public long query(int l, int r) {
       return query(1, 0, n - 1, l, r);
     }
 
-    private Pair query(int v, int tl, int tr, int l, int r) {
-      if (l > r) return new Pair(Integer.MAX_VALUE, 0);
-      if (l == tl && r == tr) return tree[v];
+    private long query(int v, int tl, int tr, int l, int r) {
+      if (l > r) {
+        return Integer.MAX_VALUE;
+      }
+      if (l == tl && r == tr) {
+        return tree[v];
+      }
       int tm = (tl + tr) / 2;
-      return merge(
+      return Math.min(
           query(2 * v, tl, tm, l, Math.min(r, tm)),
           query(2 * v + 1, tm + 1, tr, Math.max(l, tm + 1), r));
     }
@@ -122,29 +125,16 @@ public class D1T3 {
 
     private void update(int v, int tl, int tr, int pos, long newVal) {
       if (tl == tr) {
-        tree[v] = new Pair(newVal, 1);
+        tree[v] = newVal;
       } else {
         int tm = (tl + tr) / 2;
-        if (pos <= tm) update(2 * v, tl, tm, pos, newVal);
-        else update(2 * v + 1, tm + 1, tr, pos, newVal);
-        tree[v] = merge(tree[2 * v], tree[2 * v + 1]);
+        if (pos <= tm) {
+          update(2 * v, tl, tm, pos, newVal);
+        } else {
+          update(2 * v + 1, tm + 1, tr, pos, newVal);
+        }
+        tree[v] = Math.min(tree[2 * v], tree[2 * v + 1]);
       }
-    }
-
-    private Pair merge(Pair a, Pair b) {
-      if (a.min < b.min) return new Pair(a.min, a.count);
-      if (a.min > b.min) return new Pair(b.min, b.count);
-      return new Pair(a.min, a.count + b.count);
-    }
-  }
-
-  static class Pair {
-    long min;
-    long count;
-
-    Pair(long min, long count) {
-      this.min = min;
-      this.count = count;
     }
   }
 }

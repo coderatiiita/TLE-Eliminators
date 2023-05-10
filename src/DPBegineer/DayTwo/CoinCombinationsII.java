@@ -1,4 +1,4 @@
-package DPBegineer;
+package DPBegineer.DayTwo;
 
 import java.io.*;
 

@@ -1,4 +1,4 @@
-//package DP;
+package DPBegineer.DayTwo;//package DP;
 
 import java.io.*;
 import java.util.Arrays;
