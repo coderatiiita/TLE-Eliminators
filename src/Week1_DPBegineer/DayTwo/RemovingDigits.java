@@ -1,4 +1,4 @@
-package Week1DPBegineer.DayTwo;//package DP;
+package Week1_DPBegineer.DayTwo;//package DP;
 
 import java.io.*;
 import java.util.Arrays;

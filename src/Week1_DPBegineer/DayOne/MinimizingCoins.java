@@ -1,4 +1,4 @@
-package Week1DPBegineer.DayOne;
+package Week1_DPBegineer.DayOne;
 
 import java.util.Arrays;
 import java.util.Scanner;

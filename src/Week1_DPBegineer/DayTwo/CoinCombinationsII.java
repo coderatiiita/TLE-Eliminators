@@ -1,4 +1,4 @@
-package Week1DPBegineer.DayTwo;
+package Week1_DPBegineer.DayTwo;
 
 import java.io.*;
 
