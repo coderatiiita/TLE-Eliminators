@@ -1,10 +1,7 @@
 package CodeForces.Div3.Round874;
 
-import java.io.DataInputStream;
-import java.io.FileInputStream;
-import java.io.IOException;
-import java.util.ArrayList;
-import java.util.List;
+import java.io.*;
+import java.util.Arrays;
 
 public class C {
     static class Reader {
@@ -124,21 +121,35 @@ public class C {
 
     public static void main(String[] args) throws IOException {
         Reader reader = new Reader();
+        PrintWriter out = new PrintWriter(new BufferedWriter(new OutputStreamWriter(System.out)));
+
+        StringBuilder sb = new StringBuilder();
+
         int t = reader.nextInt();
         while (t-- > 0) {
             int n = reader.nextInt();
             int[] a = new int[n];
-            int even = 0, odd = 0;
             for (int i = 0; i < n; i++) {
                 a[i] = reader.nextInt();
-                if (a[i] % 2 == 0) even++;
-                else odd++;
             }
-            if (odd == even || odd % 2 == 0) {
-                System.out.printf("YES" + (t!=0 ? "\n" : ""));
-            } else {
-                System.out.printf("NO" + (t!=0 ? "\n" : ""));
+            Arrays.sort(a);
+            if (a[0] % 2 == 1) {
+                sb.append("YES" + (t!=0 ? "\n" : ""));
+                continue;
             }
+            boolean flag = false;
+            for (int i=0; i<n; i++) {
+                if (a[i] % 2 == 1) {
+                    sb.append("NO" + (t!=0 ? "\n" : ""));
+                    flag = true;
+                    break;
+                }
+            }
+            if (flag) continue;
+            sb.append("YES" + (t!=0 ? "\n" : ""));
         }
+        out.printf(sb.toString());
+        out.flush();
+        out.close();
     }
 }

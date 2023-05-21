@@ -207,7 +207,7 @@ public class CPTemplate {
     }
 
     public static void main(String[] args) throws IOException {
-    Reader reader = new Reader();
+        Reader reader = new Reader();
         PrintWriter out = new PrintWriter(new BufferedWriter(new OutputStreamWriter(System.out)));
 
         int n = reader.nextInt();
