@@ -1,4 +1,4 @@
-package Week6_TreesBegineer.Class;
+package Week6_TreesBegineer.ClassQ;
 
 import java.io.*;
 import java.util.ArrayList;
