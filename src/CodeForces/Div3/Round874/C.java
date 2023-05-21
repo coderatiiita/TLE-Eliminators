@@ -1,6 +1,12 @@
-import java.io.*;
+package CodeForces.Div3.Round874;
 
-public class CPTemplate {
+import java.io.DataInputStream;
+import java.io.FileInputStream;
+import java.io.IOException;
+import java.util.ArrayList;
+import java.util.List;
+
+public class C {
     static class Reader {
         private final int BUFFER_SIZE = 1 << 16;
         private final DataInputStream din;
@@ -116,104 +122,23 @@ public class CPTemplate {
         }
     }
 
-    static class Pair {
-        int x;
-        int y;
-
-        public Pair(int x, int y) {
-            this.x = x;
-            this.y = y;
-        }
-    }
-
-    static class SegmentTree {
-        private long[] tree;
-        private long[] arr;
-        private long[] lazy;
-        private int n;
-
-        public SegmentTree(long[] arr) {
-            this.arr = arr;
-            this.n = arr.length;
-            this.tree = new long[4 * n];
-            this.lazy = new long[4 * n];
-            build(1, 0, n - 1);
-        }
-
-        private void build(int v, int tl, int tr) {
-            if (tl == tr) {
-                tree[v] = arr[tl];
-            } else {
-                int tm = (tl + tr) / 2;
-                build(2 * v, tl, tm);
-                build(2 * v + 1, tm + 1, tr);
-                tree[v] = tree[2 * v] + tree[2 * v + 1];
-            }
-        }
-
-        public long query(int l, int r) {
-            return query(1, 0, n - 1, l, r);
-        }
-
-        private long query(int v, int tl, int tr, int l, int r) {
-            if (l > r) {
-                return 0;
-            }
-            if (lazy[v] != 0) {
-                tree[v] += (tr - tl + 1) * lazy[v];
-                if (tl != tr) {
-                    lazy[2 * v] += lazy[v];
-                    lazy[2 * v + 1] += lazy[v];
-                }
-                lazy[v] = 0;
-            }
-            if (l == tl && r == tr) {
-                return tree[v];
-            }
-            int tm = (tl + tr) / 2;
-            return query(2 * v, tl, tm, l, Math.min(r, tm))
-                    + query(2 * v + 1, tm + 1, tr, Math.max(l, tm + 1), r);
-        }
-
-        public void update(long l, long r, long newVal) {
-            update(1, 0, n - 1, l, r, newVal);
-        }
-
-        private void update(int v, int tl, int tr, long l, long r, long newVal) {
-            if (lazy[v] != 0) {
-                tree[v] += (tr - tl + 1) * lazy[v];
-                if (tl != tr) {
-                    lazy[2 * v] += lazy[v];
-                    lazy[2 * v + 1] += lazy[v];
-                }
-                lazy[v] = 0;
-            }
-            if (l > r) {
-                return;
-            }
-            if (l == tl && r == tr) {
-                tree[v] = (tr - tl + 1) * newVal;
-                if (tl != tr) {
-                    lazy[2 * v] += newVal;
-                    lazy[2 * v + 1] += newVal;
-                }
-            } else {
-                int tm = (tl + tr) / 2;
-                update(2 * v, tl, tm, l, Math.min(r, tm), newVal);
-                update(2 * v + 1, tm + 1, tr, Math.max(l, tm + 1), r, newVal);
-                tree[v] = tree[2 * v] + tree[2 * v + 1];
-            }
-        }
-    }
-
     public static void main(String[] args) throws IOException {
-    Reader reader = new Reader();
-        PrintWriter out = new PrintWriter(new BufferedWriter(new OutputStreamWriter(System.out)));
-
-        int n = reader.nextInt();
-        out.println(n);
-
-        out.flush();
-        out.close();
+        Reader reader = new Reader();
+        int t = reader.nextInt();
+        while (t-- > 0) {
+            int n = reader.nextInt();
+            int[] a = new int[n];
+            int even = 0, odd = 0;
+            for (int i = 0; i < n; i++) {
+                a[i] = reader.nextInt();
+                if (a[i] % 2 == 0) even++;
+                else odd++;
+            }
+            if (odd == even || odd % 2 == 0) {
+                System.out.printf("YES" + (t!=0 ? "\n" : ""));
+            } else {
+                System.out.printf("NO" + (t!=0 ? "\n" : ""));
+            }
+        }
     }
 }
